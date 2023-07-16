@@ -1,0 +1,42 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-8" style="background-image: url(/assets/images/pexels-jopwell-2422280.jpg); background-size: cover;"></div>
+		<div class="col">
+			<div class="container">
+				<div class="row vh-100 align-items-center">
+					<div class="col-10">
+						<h5>Crie uma conta profissional</h5>
+						<p>Preencha seus dados para ter acesso</p>
+						<form [formGroup]="checkoutForm">
+							<div class="mb-2">
+								<label for="nomeCompleteInput" class="form-label fw-bold">Nome Completo</label>
+								<input type="email" class="form-control" id="nomeCompleteInput" placeholder="Digite seu nome completo">
+							</div>
+							<div class="mb-2">
+								<label for="emailInput" class="form-label fw-bold">E-mail</label>
+								<input type="email" class="form-control" id="emailInput" placeholder="Digite seu cadastrado / ex: email@gmail.com">
+							</div>
+							<div class="mb-2">
+								<label for="passwordInput" class="form-label fw-bold">Senha</label>
+								<input type="password" id="passwordInput" class="form-control" placeholder="Digite uma senha forte">
+							</div>
+							<div class="mb-2">
+								<label for="passwordRepeatInput" class="form-label fw-bold">Confirmação de Senha</label>
+								<input type="password" id="passwordRepeatInput" class="form-control" placeholder="Repita sua senha">
+							</div>
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+								<label class="form-check-label" for="flexCheckDefault">
+									Eu aceito os <a href="">Termos de Privacidade</a> e o <a href="">Contrato de Serviço</a>
+								</label>
+							</div>
+							<div class="d-grid gap-2">
+								<button class="btn btn-primary " (click)="onCreateAccountClick()">Criar Conta</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
