@@ -7,31 +7,51 @@
 					<div class="col-10">
 						<h5>Crie uma conta profissional</h5>
 						<p>Preencha seus dados para ter acesso</p>
-						<form [formGroup]="checkoutForm">
+
+						<form [formGroup]="form" (ngSubmit)="onSubmit()">
 							<div class="mb-2">
 								<label for="nomeCompleteInput" class="form-label fw-bold">Nome Completo</label>
-								<input type="email" class="form-control" id="nomeCompleteInput" placeholder="Digite seu nome completo">
+								<input type="text" class="form-control" id="nomeCompleteInput" formControlName="name" placeholder="Digite seu nome completo">
+								<div *ngIf="form.controls['name'].invalid && form.controls['name'].touched" class="form-text text-danger">
+									<div *ngIf="form.controls['name'].errors.required">Por favor preencha com seu nome completo</div>
+									<div *ngIf="form.controls['name'].errors.pattern">Seu nome completo não parece estar correto</div>
+								</div>
 							</div>
 							<div class="mb-2">
 								<label for="emailInput" class="form-label fw-bold">E-mail</label>
-								<input type="email" class="form-control" id="emailInput" placeholder="Digite seu cadastrado / ex: email@gmail.com">
+								<input type="email" class="form-control" id="emailInput" formControlName="email" placeholder="Digite seu e-mail cadastrado / ex: email@gmail.com">
+								<div *ngIf="form.controls['email'].invalid && form.controls['email'].touched" class="form-text text-danger">
+									<div *ngIf="form.controls['email'].errors.required">Por favor preencha com seu e-mail</div>
+									<div *ngIf="form.controls['email'].errors.email">Seu e-mail não parece estar correto</div>
+								</div>
 							</div>
 							<div class="mb-2">
 								<label for="passwordInput" class="form-label fw-bold">Senha</label>
-								<input type="password" id="passwordInput" class="form-control" placeholder="Digite uma senha forte">
+								<input type="password" id="passwordInput" class="form-control" formControlName="password" placeholder="Digite uma senha forte">
+								<div *ngIf="form.controls['password'].invalid && form.controls['password'].touched" class="form-text text-danger">
+									<div *ngIf="form.controls['password'].errors.required">Escolha uma senha forte</div>
+									<div *ngIf="form.controls['password'].errors.minlength">Sua senha precisar ter pelo menos 8 caracteres</div>
+								</div>
 							</div>
 							<div class="mb-2">
 								<label for="passwordRepeatInput" class="form-label fw-bold">Confirmação de Senha</label>
-								<input type="password" id="passwordRepeatInput" class="form-control" placeholder="Repita sua senha">
+								<input type="password" id="passwordRepeatInput" class="form-control" formControlName="confirmPassword" placeholder="Repita sua senha">
+								<div *ngIf="form.controls['confirmPassword'].invalid && form.controls['confirmPassword'].touched" class="form-text text-danger">
+									<div *ngIf="form.controls['confirmPassword'].errors.required">Você precisa confirmar sua senha</div>
+									<div *ngIf="form.controls['confirmPassword'].errors.matching">A confirmação da senha precisar igual a sua senha </div>
+								</div>
 							</div>
 							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-								<label class="form-check-label" for="flexCheckDefault">
+								<input class="form-check-input" type="checkbox" value="" id="acceptCheckbox" formControlName="accept">
+								<label class="form-check-label" for="acceptCheckbox">
 									Eu aceito os <a href="">Termos de Privacidade</a> e o <a href="">Contrato de Serviço</a>
 								</label>
+								<div *ngIf="form.controls['accept'].invalid && form.controls['accept'].touched" class="form-text text-danger">
+									<div *ngIf="form.controls['accept'].errors.required">Você aceitar os Termos de Privacidade e o Contrato de Serviço</div>
+								</div>
 							</div>
 							<div class="d-grid gap-2">
-								<button class="btn btn-primary " (click)="onCreateAccountClick()">Criar Conta</button>
+								<button class="btn btn-primary" [disabled]="!form.valid" type="submit">Criar Conta</button>
 							</div>
 						</form>
 					</div>

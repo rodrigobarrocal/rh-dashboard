@@ -4,27 +4,172 @@
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
 					<button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-						Home
+						Config do Sistema
 					</button>
 					<div class="collapse show" id="home-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-white-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-							<li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-							<li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
+							<li><a href="#" class="link-white-emphasis d-inline-flex text-decoration-none rounded">Minha Empresa</a></li>
+
 						</ul>
 					</div>
 				</li>
 			</ul>
 		</div>
-		<div class="col">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-7">
-						<h1>Ola {{logged.name}}, seja bem-vindo</h1>
-						<p>è Necessário configurar a empresa matriz para visualizar todos as informações do sistema.</p>
-						<button class="btn btn-primary">Iniciar Configuração</button>
+		<div class="col bg-body-tertiary">
+			<div class="container-fluid p-4">
+				<div class="row d-flex align-items-center bg-white p-4">
+					<div class="col-7 ">
+						<div class="text-center">
+							<h1>Ola {{employee.name}}, seja bem-vindo</h1>
+							<p>É necessário configurar a empresa matriz para visualizar todos as informações do sistema.</p>
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#empresaModal">
+								Iniciar Configuração
+							</button>
+							<pre *ngIf="employee.empresa">
+							temos empresa
+							</pre>
+						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="empresaModal" tabindex="-1" aria-labelledby="empresaModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-xl">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5" id="empresaModalLabel">Complete a Configuração</h1>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<form [formGroup]="form" (ngSubmit)="onSubmit()">
+										<div class="modal-body">
+											<!-- <p>Form value: {{ form.controls['cpfAdministrador'].errors | json }}</p> -->
+											<!-- <p>Form value: {{ form.value | json }}</p> -->
+											<div class="container-fluid">
+												<div class="row mb-3">
+													<div class="col-3">
+														<label for="tipoEmpresaInput" class="form-label fw-bold">Tipo de Empresa</label>
+														<input type="text" class="form-control" id="tipoEmpresaInput" formControlName="tipoEmpresa">
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-8">
+														<label for="nomeEmpresaInput" class="form-label fw-bold">Nome da Empresa*</label>
+														<input type="text" class="form-control" id="nomeEmpresaInput" formControlName="nomeEmpresa">
+														<div *ngIf="form.controls['nomeEmpresa'].invalid && form.controls['nomeEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['nomeEmpresa'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+													<div class="col-4">
+														<label for="cnpjEmpresaInput" class="form-label fw-bold">CNPJ da Empresa*</label>
+														<input type="text" class="form-control" id="cnpjEmpresaInput" formControlName="cnpjEmpresa" mask="00.000.000/0000-00">
+														<div *ngIf="form.controls['cnpjEmpresa'].invalid && form.controls['cnpjEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['cnpjEmpresa'].errors.required">Esse campo é necessário</div>
+															<div *ngIf="form.controls['cnpjEmpresa'].errors.cnpjInvalid">Verifique o CNPJ inserido</div>
+														</div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-2">
+														<label for="cepEmpresaInput" class="form-label fw-bold">CEP*</label>
+														<input type="text" class="form-control" id="cepEmpresaInput" formControlName="cepEmpresa" mask="00000-000" (maskFilled)="onCEPFilled($event)">
+														<div *ngIf=" form.controls['cepEmpresa'].invalid && form.controls['cepEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['cepEmpresa'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+													<div class="col-6">
+														<label for="enderecoEmpresaInput" class="form-label fw-bold">Endereço*</label>
+														<input type="text" class="form-control" id="enderecoEmpresaInput" formControlName="enderecoEmpresa">
+														<div *ngIf="form.controls['enderecoEmpresa'].invalid && form.controls['enderecoEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['enderecoEmpresa'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+													<div class="col-1">
+														<label for="numeroEmpresaInput" class="form-label fw-bold">Nº</label>
+														<input type="text" class="form-control" id="numeroEmpresaInput" formControlName="numeroEmpresa">
+														<div *ngIf="form.controls['numeroEmpresa'].invalid && form.controls['numeroEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['numeroEmpresa'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+													<div class="col-3">
+														<label for="complemnteEmpresaInput" class="form-label fw-bold">Complemento</label>
+														<input type="text" class="form-control" id="complemnteEmpresaInput" formControlName="complemnteEmpresa">
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-2">
+														<label for="ufEmpresaInput" class="form-label fw-bold">UF</label>
+														<select class="form-select" id="ufEmpresaInput" formControlName="ufEmpresa" (change)="onUFSelected(form.controls['ufEmpresa'].value)">
+															<option disabled="disabled" value="">UF</option>
+															<option *ngFor="let uf of dataUF.estados;" [value]="uf.sigla">{{ uf.sigla }}</option>
+														</select>
+														<div *ngIf="form.controls['ufEmpresa'].invalid && form.controls['ufEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['ufEmpresa'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+													<div class="col-6">
+														<label for="cidadeEmpresaInput" class="form-label fw-bold">Cidade*</label>
+														<select class="form-select" id="cidadeEmpresaInput" formControlName="cidadeEmpresa">
+															<!-- <option *ngFor="let cidade of form.controls['ufEmpresa'].value.cidades" [ngValue]="cidade">{{ cidade }}</option> -->
+															<option disabled="disabled" value="">Cidade</option>
+															<option *ngFor="let cidade of selectedUF" [ngValue]="cidade">{{ cidade }}</option>
+														</select>
+														<div *ngIf="form.controls['cidadeEmpresa'].invalid && form.controls['cidadeEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['cidadeEmpresa'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+													<div class="col-4">
+														<label for="bairroEmpresaInput" class="form-label fw-bold">Bairro*</label>
+														<input type="text" class="form-control" id="bairroEmpresaInput" formControlName="bairroEmpresa">
+														<div *ngIf="form.controls['bairroEmpresa'].invalid && form.controls['bairroEmpresa'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['bairroEmpresa'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+												</div>
+												<h4 class="mb-3 mt-6 border-bottom">Administrador</h4>
+												<div class="row mb-3">
+													<div class="col-4">
+														<label for="nomeAdministradorInput" class="form-label fw-bold">Administrador</label>
+														<input type="text" class="form-control" id="nomeAdministradorInput" formControlName="nomeAdministrador">
+														<div *ngIf="form.controls['nomeAdministrador'].invalid && form.controls['nomeAdministrador'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['nomeAdministrador'].errors.required">Esse campo é necessário</div>
+														</div>
+													</div>
+													<div class="col-2">
+														<label for="celularAdministradorInput" class="form-label fw-bold">Celular</label>
+														<input type="text" class="form-control" id="celularAdministradorInput" formControlName="celularAdministrador" mask="(00) 00000-0000">
+														<div *ngIf="form.controls['celularAdministrador'].invalid && form.controls['celularAdministrador'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['celularAdministrador'].errors.required">Esse campo é necessário</div>
+															<div *ngIf="form.controls['celularAdministrador'].errors.pattern">Verifique o celular inserido</div>
+														</div>
+													</div>
+													<div class="col-2">
+														<label for="cpfAdministradorInput" class="form-label fw-bold">CPF</label>
+														<input type="text" class="form-control" id="cpfAdministradorInput" formControlName="cpfAdministrador" mask="000.000.000-00">
+														<div *ngIf="form.controls['cpfAdministrador'].invalid && form.controls['cpfAdministrador'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['cpfAdministrador'].errors.required">Esse campo é necessário</div>
+															<div *ngIf="form.controls['cpfAdministrador'].errors.cpfInvalid">Verifique o CPF inserido</div>
+														</div>
+													</div>
+													<div class="col-4">
+														<label for="emailAdministradorInput" class="form-label fw-bold">E-mail</label>
+														<input type="text" class="form-control" id="emailAdministradorInput" formControlName="emailAdministrador">
+														<div *ngIf="form.controls['emailAdministrador'].invalid && form.controls['emailAdministrador'].touched" class="form-text text-danger">
+															<div *ngIf="form.controls['emailAdministrador'].errors.required">Esse campo é necessário</div>
+															<div *ngIf="form.controls['emailAdministrador'].errors.email">verifique o e-mail inserido</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+											<button class="btn btn-primary" [disabled]="!form.valid" type="submit">Salvar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-5"></div>
+					<div class="col-5">
+						<img src="/assets/images/work-bro.png" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+					</div>
 				</div>
 			</div>
 		</div>
