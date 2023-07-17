@@ -22,7 +22,7 @@ export function matchingPasswordValidator(
 export function CNPJValidator(): ValidatorFn {
 	return (control: AbstractControl): ValidationErrors | null => {
 		const cpf = control.value;
-		console.log(cpf);
+		// console.log(cpf);
 
 		const value = control.value;
 
@@ -50,7 +50,7 @@ export function CNPJValidator(): ValidatorFn {
 export function CPFValidator(): ValidatorFn {
 	return (control: AbstractControl): ValidationErrors | null => {
 		const cpf = control.value;
-		console.log(cpf);
+		// console.log(cpf);
 
 		const value = control.value;
 

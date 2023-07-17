@@ -9,7 +9,7 @@ export class ConsultaCepService {
 	constructor(private http: HttpClient) {}
 
 	consultaCEP(cep: string): any {
-		console.log(cep);
+		// console.log(cep);
 
 		cep = cep.replace(/\D/g, '');
 
@@ -18,7 +18,7 @@ export class ConsultaCepService {
 
 			if (validacep.test(cep)) {
 				const ret = this.http.get(`//viacep.com.br/ws/${cep}/json`);
-				console.log(ret);
+				// console.log(ret);
 				return ret;
 			}
 		}

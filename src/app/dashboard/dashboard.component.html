@@ -1,0 +1,85 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-2 vh-100 d-flex flex-column flex-shrink-0 p-3 text-bg-light">
+			<ul class="list-unstyled ps-0">
+				<li class="mb-1">
+					<button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+						Config da Empresa
+					</button>
+					<div class="collapse show" id="home-collapse">
+						<ul class="nav flex-column">
+							<li class="nav-item">
+								<a class="nav-link">Minha Empresa</a>
+								<a class="nav-link">Benefícios</a>
+								<a class="nav-link">Áreas</a>
+								<a class="nav-link">Cargos</a>
+								<a class="nav-link">Filiais</a>
+							</li>
+						</ul>
+					</div>
+					<button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#config-collapse" aria-expanded="true">
+						Config do Sistema
+					</button>
+					<div class="collapse show" id="config-collapse">
+						<ul class="nav flex-column">
+							<li class="nav-item">
+								<a class="nav-link">Item</a>
+								<a class="nav-link">Item</a>
+								<a class="nav-link">Item</a>
+								<a class="nav-link">Item</a>
+								<a class="nav-link">Item</a>
+
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="col bg-body-tertiary">
+			<div class="container-fluid d-flex p-4">
+				<div class="row d-flex flex-fill align-items-center bg-white p-4">
+					<div class="col-12">
+						<div class="row">
+							<div class="col-3">
+								<h5>Nome da Empresa</h5>
+								<p>{{ employee.empresa.nomeEmpresa }}</p>
+							</div>
+							<div class="col-3">
+								<h5>CNPJ da Empresa</h5>
+								<p>{{ employee.empresa.cnpjEmpresa | mask: '00.000.000/0000-00'  }}</p>
+							</div>
+							<div class="col-4">
+								<h5>Nome do Administrador</h5>
+								<p>{{ employee.empresa.nomeAdministrador }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h5>CPF do Administrador</h5>
+								<p>{{ employee.empresa.cpfAdministrador | mask: '000.000.000-00' }}</p>
+							</div>
+							<div class="col-3">
+								<h5>E-mail Administrador</h5>
+								<p>{{ employee.empresa.emailAdministrador }}</p>
+							</div>
+							<div class="col-4">
+								<h5>Telefone</h5>
+								<p>{{ employee.empresa.celularAdministrador  | mask: '(00) 00000-0000'}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h5>CEP</h5>
+								<p>{{ employee.empresa.cepEmpresa | mask: '00000-000' }}</p>
+							</div>
+							<div class="col-9">
+								<h5>Endereço</h5>
+								<p>{{ employee.empresa.enderecoEmpresa}}, {{ employee.empresa.numeroEmpresa}}, {{ employee.empresa.complementoEmpresa}}, {{employee.empresa.bairroEmpresa}}, {{ employee.empresa.ufEmpresa}}/{{ employee.empresa.cidadeEmpresa}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

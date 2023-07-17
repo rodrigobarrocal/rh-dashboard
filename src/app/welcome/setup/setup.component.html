@@ -7,9 +7,10 @@
 						Config do Sistema
 					</button>
 					<div class="collapse show" id="home-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-white-emphasis d-inline-flex text-decoration-none rounded">Minha Empresa</a></li>
-
+						<ul class="nav flex-column">
+							<li class="nav-item">
+								<a class="nav-link disabled">Minha Empresa</a>
+							</li>
 						</ul>
 					</div>
 				</li>
@@ -25,9 +26,6 @@
 							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#empresaModal">
 								Iniciar Configuração
 							</button>
-							<pre *ngIf="employee.empresa">
-							temos empresa
-							</pre>
 						</div>
 						<!-- Modal -->
 						<div class="modal fade" id="empresaModal" tabindex="-1" aria-labelledby="empresaModalLabel" aria-hidden="true">

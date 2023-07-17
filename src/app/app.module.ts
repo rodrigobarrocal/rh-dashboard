@@ -12,17 +12,24 @@ import {
 } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NewUserComponent } from './new-user/new-user.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewUserComponent } from './welcome/new-user/new-user.component';
+import { SetupComponent } from './welcome/setup/setup.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: NewUserComponent },
-	{ path: 'welcome/:key', component: WelcomeComponent },
+	{ path: 'setup/:key', component: SetupComponent },
+	{ path: 'dashboard/:key', component: DashboardComponent },
 	{ path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
 @NgModule({
-	declarations: [AppComponent, WelcomeComponent, NewUserComponent],
+	declarations: [
+		AppComponent,
+		SetupComponent,
+		NewUserComponent,
+		DashboardComponent,
+	],
 	imports: [
 		BrowserModule,
 		FormsModule,

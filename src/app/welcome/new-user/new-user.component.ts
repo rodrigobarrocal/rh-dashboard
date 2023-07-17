@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RhService } from '../shared/services/rh.service';
-import { matchingPasswordValidator } from '../shared/utils/form-validators';
+import { RhService } from '../../shared/services/rh.service';
+import { matchingPasswordValidator } from '../../shared/utils/form-validators';
 
 @Component({
 	selector: 'app-new-user',
@@ -13,27 +13,24 @@ import { matchingPasswordValidator } from '../shared/utils/form-validators';
 })
 export class NewUserComponent {
 	form: FormGroup = new FormGroup({
-		name: new FormControl('Rodrigo Barrocal', [
+		name: new FormControl('', [
 			Validators.required,
 			Validators.minLength(4),
 			Validators.pattern(
 				'[a-zzéúíóáèùìòàõãñêûîôâëyüïöäA-ZÉÚÍÓÁÈÙÌÒÀÕÃÑÊÛÎÔÂËYÜÏÖÄ]* [a-zzéúíóáèùìòàõãñêûîôâëyüïöäA-ZÉÚÍÓÁÈÙÌÒÀÕÃÑÊÛÎÔÂËYÜÏÖÄ](.*)'
 			),
 		]),
-		email: new FormControl('barrocal.rodrigo@gmail.com', [
-			Validators.required,
-			Validators.email,
-		]),
-		password: new FormControl('12345678', [
+		email: new FormControl('', [Validators.required, Validators.email]),
+		password: new FormControl('', [
 			Validators.required,
 			Validators.minLength(8),
 			matchingPasswordValidator('confirmPassword', true),
 		]),
-		confirmPassword: new FormControl('12345678', [
+		confirmPassword: new FormControl('', [
 			Validators.required,
 			matchingPasswordValidator('password'),
 		]),
-		accept: new FormControl(true, [Validators.requiredTrue]),
+		accept: new FormControl(false, [Validators.requiredTrue]),
 	});
 
 	constructor(
@@ -48,7 +45,7 @@ export class NewUserComponent {
 			this.form.value
 		);
 		if (save) {
-			this.router.navigate(['./welcome', this.form.value.email]);
+			this.router.navigate(['./setup', this.form.value.email]);
 		}
 	}
 }
